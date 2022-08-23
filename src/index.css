@@ -11,3 +11,109 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.container {
+  display: flex;
+  max-width: 1388px;
+  margin: auto;
+}
+
+.container div {
+  flex-basis: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-container {
+  background-color: rgb(246, 248, 247);
+}
+
+.card-form {
+  width: 50%;
+}
+
+input, textarea, button{
+  font-family: sans-serif;
+  outline: none;
+  padding: .4rem;
+}
+
+label {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgb(58, 67, 83);
+  margin: 1rem 0;
+}
+
+.card-form .name-input, .description-input, select {
+  background-color: white;
+  width: 100%;
+  box-sizing: border-box;
+  padding: .4rem;
+  border: none;
+  border-bottom: 1px solid black;
+}
+
+.card-form .row-label {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.row-label input {
+
+}
+
+.name-input, .description-input, select {
+  margin: .5rem 0 1rem 0;
+}
+
+.input-box {
+  display: flex;
+  gap: .5rem;
+  flex-direction: row!important;
+}
+
+.row-label .input-box {
+  flex-basis: 100%;
+}
+
+.row-label .input-box input {
+  width: 100%;
+}
+
+.fa-solid.fa-circle-check {
+  color: rgb(89, 121, 89);
+  margin-left: -1.36rem;
+  visibility: hidden;
+}
+
+.exclamation {
+  display: flex;
+  align-items: center;
+  font-size: 10px;
+  color: rgb(197, 17, 17);
+  font-weight: 600;
+  border: 2px solid rgb(197, 17, 17);
+  padding: 0rem .27rem .01rem .27rem;
+  border-radius: 50%;
+  opacity: .6;
+}
+
+button {
+  padding: 0.5rem 1.5rem;
+  border: none;
+  color: white;
+  background-color: rgb(77, 77, 243);
+  border-radius: 0.2rem;
+  margin: 3rem 0;
+}
+
+
+input[type='checkbox'] {
+  accent-color: rgb(79, 117, 79);
+}
+
+
