@@ -33,7 +33,7 @@ code {
   width: 50%;
 }
 
-input, textarea, button{
+input, textarea, button, select{
   font-family: sans-serif;
   outline: none;
   padding: .4rem;
