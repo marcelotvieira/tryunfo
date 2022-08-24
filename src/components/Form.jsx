@@ -4,6 +4,9 @@ import PropTypes from 'prop-types';
 export default class Form extends Component {
   render() {
     const {
+      onInputChange,
+      isSaveButtonDisabled,
+      onSaveButtonClick,
       cardName,
       cardDescription,
       cardAttr1,
@@ -13,21 +16,18 @@ export default class Form extends Component {
       cardRare,
       cardTrunfo,
       // hasTrunfo,
-      isSaveButtonDisabled,
-      onInputChange,
-      onSaveButtonClick,
     } = this.props;
 
     return (
       <form action="" className="card-form">
         <label
-          htmlFor="name"
+          htmlFor="cardName"
         >
           Nome
           <div className="input-box">
             <input
               placeholder="Type the name..."
-              name="name"
+              name="cardName"
               type="text"
               data-testid="name-input"
               className="name-input"
@@ -39,34 +39,32 @@ export default class Form extends Component {
           </div>
         </label>
 
-        <label htmlFor="description">
+        <label htmlFor="cardDescription">
           Descrição
           <div className="input-box">
             <textarea
               value={ cardDescription }
               onChange={ onInputChange }
               placeholder="Type the card description..."
-              name="description"
+              name="cardDescription"
               cols="30"
               rows="4"
               data-testid="description-input"
               className="description-input"
             />
-            <span className="exclamation">!</span>
-            <i className="fa-solid fa-circle-check" />
           </div>
         </label>
 
         <label
           className="row-label"
-          htmlFor="attr1"
+          htmlFor="cardAttr1"
         >
           Attr01
           <div className="input-box">
             <input
               value={ cardAttr1 }
               onChange={ onInputChange }
-              name="attr1"
+              name="cardAttr1"
               type="number"
               data-testid="attr1-input"
               className="attr1-input"
@@ -78,14 +76,14 @@ export default class Form extends Component {
 
         <label
           className="row-label"
-          htmlFor="attr2"
+          htmlFor="cardAttr2"
         >
           Attr02
           <div className="input-box">
             <input
               value={ cardAttr2 }
               onChange={ onInputChange }
-              name="attr2"
+              name="cardAttr2"
               type="number"
               data-testid="attr2-input"
               className="attr2-input"
@@ -97,14 +95,14 @@ export default class Form extends Component {
 
         <label
           className="row-label"
-          htmlFor="attr3"
+          htmlFor="cardAttr3"
         >
           Attr03
           <div className="input-box">
             <input
               value={ cardAttr3 }
               onChange={ onInputChange }
-              name="attr3"
+              name="cardAttr3"
               type="number"
               data-testid="attr3-input"
               className="attr3-input"
@@ -116,14 +114,14 @@ export default class Form extends Component {
 
         <label
           className="row-label"
-          htmlFor="image"
+          htmlFor="cardImage"
         >
           Imagem
           <div className="input-box">
             <input
               value={ cardImage }
               onChange={ onInputChange }
-              name="image"
+              name="cardImage"
               type="text"
               data-testid="image-input"
             />
@@ -137,7 +135,7 @@ export default class Form extends Component {
           <select
             value={ cardRare }
             onChange={ onInputChange }
-            name="rarity"
+            name="cardRare"
             id="rarity"
             data-testid="rare-input"
           >
@@ -146,10 +144,10 @@ export default class Form extends Component {
             <option value="muito raro">muito raro</option>
           </select>
         </label>
-
-        <label htmlFor="super">
+        <br />
+        <label htmlFor="cardTrunfo">
           <input
-            name="super"
+            name="cardTrunfo"
             type="checkbox"
             data-testid="trunfo-input"
             checked={ cardTrunfo }
@@ -182,11 +180,13 @@ Form.propTypes = {
   cardRare: PropTypes.string.isRequired,
   cardTrunfo: PropTypes.bool.isRequired,
   // hasTrunfo: PropTypes.bool.isRequired,
-  isSaveButtonDisabled: PropTypes.bool.isRequired,
-  onInputChange: PropTypes.func.isRequired,
   onSaveButtonClick: PropTypes.func.isRequired,
+  isSaveButtonDisabled: PropTypes.bool,
+  onInputChange: PropTypes.func.isRequired,
 };
 
 Form.defaultProps = {
   cardDescription: '',
+  isSaveButtonDisabled: false,
+
 };

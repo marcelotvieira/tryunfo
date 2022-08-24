@@ -16,6 +16,8 @@ code {
   display: flex;
   max-width: 1388px;
   margin: auto;
+  min-height: 100vh;
+  align-items: center;
 }
 
 .container div {
@@ -25,9 +27,30 @@ code {
   align-items: center;
 }
 
+.container div h1 {
+  font-size: 1.4rem;
+  align-self: flex-start;
+  margin: 4rem;
+  margin-bottom: 8rem;
+
+}
+
 .form-container {
   background-color: rgb(246, 248, 247);
+  min-height: 100vh;
 }
+
+.preview-container {
+  color: white;
+  background-color: rgb(46, 46, 46);
+  border: 1px solid blue;
+  min-height: 100vh;
+}
+
+.preview-container h1 {
+  margin-bottom: 12rem!important;
+}
+
 
 .card-form {
   width: 50%;
@@ -68,6 +91,10 @@ label {
 
 .name-input, .description-input, select {
   margin: .5rem 0 1rem 0;
+}
+
+.description-input, select {
+  width: 93%;
 }
 
 .input-box {
@@ -111,9 +138,122 @@ button {
   margin: 3rem 0;
 }
 
+button:disabled {
+  opacity: .3;
+  pointer-events: none;
+}
 
 input[type='checkbox'] {
   accent-color: rgb(79, 117, 79);
 }
+
+.card-border {
+  background-color:  rgb(63, 114, 86);
+  padding: .6rem;
+  border-radius: .5rem;
+  min-height: 94%;
+  width: 90%;
+}
+.card {
+  color: black;
+  box-sizing: border-box;
+  border-radius: .5rem;
+  padding: .45rem .3rem;
+  width: 17rem;
+  min-height: 24.5rem;
+  background-color: white;
+}
+
+.card .name-card {
+  font-size: 1.2rem;
+  font-weight: 700;
+  background-color: rgb(46, 46, 46);
+  width: 100%;
+  min-height: 2.2rem;
+  text-align: right;
+  color: white;
+  margin: 0;
+  padding: .5rem;
+  box-sizing: border-box;
+  border-top-left-radius: .5rem;
+  border-top-right-radius: .5rem;
+}
+
+.card img {
+  width: 100%;
+  background-color: white;
+  min-height: 11rem;
+}
+
+.description-card {
+  background-color:  rgb(63, 114, 86);
+  padding: .3rem;
+  box-sizing: border-box;
+  font-size: 9px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.7);
+  transform: rotateZ(-6deg) translateX(3px) translateY(-1.9rem);
+  width: 103%;
+  min-height: 2.2rem;
+
+}
+
+.super-trunfo {
+  font-size: 10px;
+  font-weight: 600;
+  color: white;
+  width: 2.5rem;
+  min-height: 2.5rem;
+  border-radius: 50%;
+  background-color: rgb(63, 114, 86);
+  border: .3rem solid rgb(46, 46, 46);
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin-top: -3.68rem;
+  transform: translateX(5.5rem) rotateZ(-15deg) translateY(-1.5rem);
+}
+
+.attr {
+  margin: 0;
+  margin-top: .1rem;
+  color: white;
+  display: flex;
+}
+
+.attr span {
+  box-sizing: border-box;
+  padding: .3rem;
+  border-top-left-radius: .5rem;
+  border-bottom-left-radius: .5rem;
+  background-color: rgba(217, 218, 221, 0.35);
+  color: rgb(71, 79, 97);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.attr .attr-value {
+  background-color: rgb(46, 46, 46);
+  color: white;
+  border-radius: 0;
+  padding: .3rem .8rem;
+  border-top-right-radius: .5rem;
+  border-bottom-right-radius: .5rem;
+  display: flex;
+  width: 2rem;
+  justify-content: center;
+}
+
+.attr-container {
+  margin-top: -3.68rem;
+  padding-top: 2.5rem;
+  width: 100%;
+  background-color: white;
+  border-bottom-left-radius: .5rem;
+  border-bottom-right-radius: .5rem;
+}
+
+
+
 
 
