@@ -61,6 +61,7 @@ export default class Form extends Component {
           Descrição
           <div className="input-box">
             <textarea
+              maxLength={ 90 }
               value={ cardDescription }
               onChange={ onInputChange }
               placeholder="Type the card description..."
