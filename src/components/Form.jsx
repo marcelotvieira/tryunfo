@@ -15,6 +15,7 @@ export default class Form extends Component {
       cardImage,
       cardRare,
       cardTrunfo,
+      checkUniqueInput,
       // hasTrunfo,
     } = this.props;
 
@@ -33,6 +34,7 @@ export default class Form extends Component {
               className="name-input"
               value={ cardName }
               onChange={ onInputChange }
+              onBlur={ checkUniqueInput }
             />
             <span className="exclamation">!</span>
             <i className="fa-solid fa-circle-check" />
@@ -64,6 +66,7 @@ export default class Form extends Component {
             <input
               value={ cardAttr1 }
               onChange={ onInputChange }
+              onBlur={ checkUniqueInput }
               name="cardAttr1"
               type="number"
               data-testid="attr1-input"
@@ -83,6 +86,7 @@ export default class Form extends Component {
             <input
               value={ cardAttr2 }
               onChange={ onInputChange }
+              onBlur={ checkUniqueInput }
               name="cardAttr2"
               type="number"
               data-testid="attr2-input"
@@ -102,6 +106,7 @@ export default class Form extends Component {
             <input
               value={ cardAttr3 }
               onChange={ onInputChange }
+              onBlur={ checkUniqueInput }
               name="cardAttr3"
               type="number"
               data-testid="attr3-input"
@@ -121,6 +126,7 @@ export default class Form extends Component {
             <input
               value={ cardImage }
               onChange={ onInputChange }
+              onBlur={ checkUniqueInput }
               name="cardImage"
               type="text"
               data-testid="image-input"
@@ -182,6 +188,7 @@ Form.propTypes = {
   // hasTrunfo: PropTypes.bool.isRequired,
   onSaveButtonClick: PropTypes.func.isRequired,
   isSaveButtonDisabled: PropTypes.bool,
+  checkUniqueInput: PropTypes.func.isRequired,
   onInputChange: PropTypes.func.isRequired,
 };
 

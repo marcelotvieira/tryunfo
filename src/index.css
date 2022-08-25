@@ -37,14 +37,13 @@ code {
 
 .form-container {
   background-color: rgb(246, 248, 247);
-  min-height: 100vh;
+  height: 100vh;
 }
 
 .preview-container {
   color: white;
   background-color: rgb(46, 46, 46);
-  border: 1px solid blue;
-  min-height: 100vh;
+  height: 100vh;
 }
 
 .preview-container h1 {
@@ -151,7 +150,6 @@ input[type='checkbox'] {
   background-color:  rgb(63, 114, 86);
   padding: .6rem;
   border-radius: .5rem;
-  min-height: 94%;
   width: 90%;
 }
 .card {
@@ -160,8 +158,8 @@ input[type='checkbox'] {
   border-radius: .5rem;
   padding: .45rem .3rem;
   width: 17rem;
-  min-height: 24.5rem;
   background-color: white;
+  max-height: 23.5rem;
 }
 
 .card .name-card {
@@ -183,6 +181,7 @@ input[type='checkbox'] {
   width: 100%;
   background-color: white;
   min-height: 11rem;
+  max-height: 11rem;
 }
 
 .description-card {

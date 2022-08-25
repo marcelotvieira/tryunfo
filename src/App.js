@@ -4,8 +4,8 @@ import Card from './components/Card';
 
 class App extends React.Component {
   state = {
-    cardName: 'Nome da carta',
-    cardDescription: 'Entre com a descrição da carta',
+    cardName: '',
+    cardDescription: '',
     cardAttr1: '',
     cardAttr2: '',
     cardAttr3: '',
@@ -13,25 +13,87 @@ class App extends React.Component {
     cardRare: 'raro',
     cardTrunfo: false,
     hasTrunfo: false,
-    isSaveButtonDisabled: false,
+    isSaveButtonDisabled: true,
+    isValidInput: false,
     onSaveButtonClick: () => { },
   };
 
-  onInputChange = (e) => {
-    const { name } = e.target;
-    const { value, checked } = e.target;
-    this.setState((state) => {
-      if (name === 'cardTrunfo') {
-        state[name] = checked;
-        return {
-          state,
-        };
+  componentDidUpdate() {
+    const isValid = this.validateSaveButton();
+    const { isSaveButtonDisabled } = this.state;
+    if (isSaveButtonDisabled !== isValid) {
+      this.setState({
+        isSaveButtonDisabled: isValid,
+      });
+    }
+  }
+
+  checkEmpty = (values) => values.some((e) => e.length < 1);
+
+  validateSaveButton = () => {
+    const {
+      cardName,
+      cardDescription,
+      cardImage,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardRare,
+    } = this.state;
+
+    const empty = this.checkEmpty([
+      cardName,
+      cardDescription,
+      cardImage,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardRare]);
+    if (empty) return true;
+    return this.validadeAttr([cardAttr1, cardAttr2, cardAttr3]);
+  };
+
+  validadeAttr = (values) => {
+    const maxAttr = 210;
+    const max = 90;
+    const min = 0;
+    const notValid = values.some((e) => Number(e) > max || Number(e) < min);
+    if (notValid) return true;
+    const sum = values.reduce((acc, curr) => acc + Number(curr), 0);
+    if (sum > maxAttr) return true;
+  };
+
+  checkUniqueInput = (e) => {
+    const min = 0;
+    const max = 90;
+    const { name, value } = e.target;
+    const { nextElementSibling: exclamation } = e.target;
+    const { nextElementSibling: checked } = exclamation;
+    const visible = 'visibility: visible';
+    const hidden = 'visibility: hidden';
+    if (name.includes('Attr')) {
+      if (value !== '' && value > min && value < max) {
+        exclamation.style = hidden;
+        checked.style = visible;
+      } else {
+        exclamation.style = visible;
+        checked.style = hidden;
       }
-      state[name] = value;
-      return {
-        state,
-      };
-    });
+    } else {
+      if (value !== '') {
+        exclamation.style = hidden;
+        checked.style = visible;
+        return;
+      }
+      exclamation.style = visible;
+      checked.style = hidden;
+    }
+  };
+
+  onInputChange = (e) => {
+    const { name, value, checked } = e.target;
+    if (name === 'cardTrunfo') return this.setState({ [name]: checked });
+    return this.setState({ [name]: value });
   };
 
   render() {
@@ -42,6 +104,7 @@ class App extends React.Component {
           <Form
             { ...this.state }
             onInputChange={ this.onInputChange }
+            checkUniqueInput={ this.checkUniqueInput }
           />
         </div>
         <div className="preview-container">
