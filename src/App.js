@@ -12,10 +12,11 @@ class App extends React.Component {
     cardImage: '',
     cardRare: 'raro',
     cardTrunfo: false,
+    deck: [],
     hasTrunfo: false,
     isSaveButtonDisabled: true,
     isValidInput: false,
-    onSaveButtonClick: () => { },
+    onSaveButtonClick: () => {},
   };
 
   componentDidUpdate() {
@@ -27,6 +28,50 @@ class App extends React.Component {
       });
     }
   }
+
+  clearForm = () => {
+    this.setState({
+      cardName: '',
+      cardDescription: '',
+      cardAttr1: '0',
+      cardAttr2: '0',
+      cardAttr3: '0',
+      cardImage: '',
+      cardRare: '',
+      cardTrunfo: false,
+    });
+  };
+
+  saveCard = () => {
+    const handleProp = 'deck';
+    const { state } = this;
+    const target = state[handleProp];
+    const {
+      cardName,
+      cardDescription,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardImage,
+      cardRare,
+      cardTrunfo,
+    } = state;
+    const card = {
+      cardName,
+      cardDescription,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardImage,
+      cardRare,
+      cardTrunfo,
+    };
+    target.push(card);
+    this.setState({
+      [handleProp]: target,
+    });
+    this.clearForm();
+  };
 
   checkEmpty = (values) => values.some((e) => e.length < 1);
 
@@ -105,6 +150,7 @@ class App extends React.Component {
             { ...this.state }
             onInputChange={ this.onInputChange }
             checkUniqueInput={ this.checkUniqueInput }
+            onSaveButtonClick={ this.saveCard }
           />
         </div>
         <div className="preview-container">
