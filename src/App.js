@@ -55,7 +55,9 @@ class App extends React.Component {
       cardImage,
       cardRare,
       cardTrunfo,
+      deck,
     } = state;
+
     const card = {
       cardName,
       cardDescription,
@@ -70,6 +72,8 @@ class App extends React.Component {
     this.setState({
       [handleProp]: target,
     });
+    const trunfo = deck.some((currCard) => currCard.cardTrunfo === true);
+    this.setState({ hasTrunfo: trunfo });
     this.clearForm();
   };
 

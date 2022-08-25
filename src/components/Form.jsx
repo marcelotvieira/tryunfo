@@ -16,8 +16,24 @@ export default class Form extends Component {
       cardRare,
       cardTrunfo,
       checkUniqueInput,
-      // hasTrunfo,
+      hasTrunfo,
     } = this.props;
+
+    const checkBoxTrunfo = (
+      <label htmlFor="cardTrunfo">
+        <input
+          name="cardTrunfo"
+          type="checkbox"
+          data-testid="trunfo-input"
+          checked={ cardTrunfo }
+          onChange={ onInputChange }
+        />
+        Super Trybe Trunfo
+      </label>);
+
+    const hasTrunfoWarn = (
+      <p>Você já tem um Super Trunfo em seu baralho</p>
+    );
 
     return (
       <form action="" className="card-form">
@@ -151,16 +167,8 @@ export default class Form extends Component {
           </select>
         </label>
         <br />
-        <label htmlFor="cardTrunfo">
-          <input
-            name="cardTrunfo"
-            type="checkbox"
-            data-testid="trunfo-input"
-            checked={ cardTrunfo }
-            onChange={ onInputChange }
-          />
-          Super Trybe Trunfo
-        </label>
+        {!hasTrunfo
+          ? checkBoxTrunfo : hasTrunfoWarn}
         <br />
 
         <button
@@ -185,7 +193,7 @@ Form.propTypes = {
   cardImage: PropTypes.string.isRequired,
   cardRare: PropTypes.string.isRequired,
   cardTrunfo: PropTypes.bool.isRequired,
-  // hasTrunfo: PropTypes.bool.isRequired,
+  hasTrunfo: PropTypes.bool.isRequired,
   onSaveButtonClick: PropTypes.func.isRequired,
   isSaveButtonDisabled: PropTypes.bool,
   checkUniqueInput: PropTypes.func.isRequired,
