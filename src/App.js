@@ -88,9 +88,8 @@ class App extends React.Component {
   };
 
   toStorage = () => {
-    const { deck } = this.state;
-    console.log(deck);
-    localStorage.setItem('deck', JSON.stringify(deck));
+    // const { deck } = this.state;
+    // localStorage.setItem('deck', JSON.stringify(deck));
   };
 
   checkEmpty = (values) => values.some((e) => e.length < 1);
@@ -161,9 +160,39 @@ class App extends React.Component {
     return this.setState({ [name]: value });
   };
 
+  removeFromDeck = (e) => {
+    const { deck } = this.state;
+    const { name } = e.target;
+    const newDeck = deck.filter((card) => card.cardDescription !== name);
+    const removedCard = deck.find((card) => card.cardDescription === name);
+    this.setState({
+      deck: newDeck,
+      hasTrunfo: !removedCard.cardTrunfo,
+    });
+    // localStorage.setItem('deck', JSON.stringify(newDeck));
+  };
+
   render() {
     const { deck } = this.state;
-    const cardEls = deck.map((card, index) => <Card key={ index } { ...card } />);
+    const currKey = Math.random() * 2;
+    const cardEls = deck.map((card, index) => (
+      <div
+        key={ index }
+        className="card-box"
+      >
+        <Card
+          key={ currKey }
+          { ...card }
+        />
+        <button
+          name={ card.cardDescription }
+          type="button"
+          onClick={ this.removeFromDeck }
+          data-testid="delete-button"
+        >
+          Excluir
+        </button>
+      </div>));
     const deckList = (
       <div className="deck-list">
         <h1> Meu baralho </h1>

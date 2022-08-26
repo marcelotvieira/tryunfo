@@ -135,7 +135,7 @@ button {
   padding: 0.5rem 1.5rem;
   border: none;
   color: white;
-  background-color: rgb(77, 77, 243);
+  background-color: rgb(101, 101, 255);
   border-radius: 0.2rem;
   margin: 3rem 0;
 }
@@ -280,6 +280,16 @@ input[type='checkbox'] {
   padding: 3rem;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.card-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.deck button {
+  margin: 0;
 }
 
 .deck .card {
