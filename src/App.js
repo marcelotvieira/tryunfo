@@ -12,6 +12,9 @@ class App extends React.Component {
     cardImage: '',
     cardRare: 'raro',
     cardTrunfo: false,
+    filtered: false,
+    filterValue: '',
+    filteredDeck: [],
     deck: [],
     hasTrunfo: false,
     isSaveButtonDisabled: true,
@@ -30,10 +33,19 @@ class App extends React.Component {
 
   componentDidUpdate() {
     const isValid = this.validateSaveButton();
-    const { isSaveButtonDisabled } = this.state;
+    const { isSaveButtonDisabled, deck,
+      filtered, filteredDeck, filterValue } = this.state;
+    const isFiltered = filterValue !== '';
+    const result = deck.filter((card) => card.cardName.includes(filterValue));
     if (isSaveButtonDisabled !== isValid) {
       this.setState({
         isSaveButtonDisabled: isValid,
+      });
+    }
+    if (filtered !== isFiltered && filteredDeck !== result) {
+      this.setState({
+        filtered: isFiltered,
+        filteredDeck: result,
       });
     }
   }
@@ -83,13 +95,7 @@ class App extends React.Component {
     });
     const trunfo = deck.some((currCard) => currCard.cardTrunfo === true);
     this.setState({ hasTrunfo: trunfo });
-    this.toStorage();
     this.clearForm();
-  };
-
-  toStorage = () => {
-    // const { deck } = this.state;
-    // localStorage.setItem('deck', JSON.stringify(deck));
   };
 
   checkEmpty = (values) => values.some((e) => e.length < 1);
@@ -169,21 +175,24 @@ class App extends React.Component {
       deck: newDeck,
       hasTrunfo: !removedCard.cardTrunfo,
     });
-    // localStorage.setItem('deck', JSON.stringify(newDeck));
+  };
+
+  filterByName = (e) => {
+    e.preventDefault();
+    const { value } = e.target;
+    this.setState({
+      filterValue: value,
+    });
   };
 
   render() {
-    const { deck } = this.state;
+    let { deck } = this.state;
+    const { filtered, filteredDeck } = this.state;
+    if (filtered) deck = filteredDeck;
     const currKey = Math.random() * 2;
     const cardEls = deck.map((card, index) => (
-      <div
-        key={ index }
-        className="card-box"
-      >
-        <Card
-          key={ currKey }
-          { ...card }
-        />
+      <div key={ index } className="card-box">
+        <Card key={ currKey } { ...card } />
         <button
           name={ card.cardDescription }
           type="button"
@@ -193,12 +202,20 @@ class App extends React.Component {
           Excluir
         </button>
       </div>));
+
     const deckList = (
-      <div className="deck-list">
-        <h1> Meu baralho </h1>
-        <div className="deck">
-          { cardEls }
+      <div className="deck-container">
+        <div className="filter">
+          <p> Filtro de Busca </p>
+          <input
+            onChange={ this.filterByName }
+            placeholder="Nome da carta"
+            data-testid="name-filter"
+            name="filter"
+            type="text"
+          />
         </div>
+        <div className="deck">{ cardEls }</div>
       </div>);
 
     return (
@@ -218,8 +235,7 @@ class App extends React.Component {
             <Card { ...this.state } />
           </div>
         </div>
-        { deck.length > 0
-          ? deckList : null}
+        { deckList }
       </div>
     );
   }
