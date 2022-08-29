@@ -1,6 +1,7 @@
 import React from 'react';
 import Form from './components/Form';
 import Card from './components/Card';
+import DeckList from './components/DeckList';
 
 class App extends React.Component {
   state = {
@@ -64,9 +65,7 @@ class App extends React.Component {
   };
 
   saveCard = () => {
-    const handleProp = 'deck';
     const { state } = this;
-    const target = state[handleProp];
     const {
       cardName,
       cardDescription,
@@ -89,13 +88,14 @@ class App extends React.Component {
       cardRare,
       cardTrunfo,
     };
-    target.push(card);
     this.setState({
-      [handleProp]: target,
+      deck: [...deck, card],
+    }, () => {
+      const { deck: list } = this.state;
+      const trunfo = list.some((currCard) => currCard.cardTrunfo === true);
+      this.setState({ hasTrunfo: trunfo });
+      this.clearForm();
     });
-    const trunfo = deck.some((currCard) => currCard.cardTrunfo === true);
-    this.setState({ hasTrunfo: trunfo });
-    this.clearForm();
   };
 
   checkEmpty = (values) => values.some((e) => e.length < 1);
@@ -186,38 +186,8 @@ class App extends React.Component {
   };
 
   render() {
-    let { deck } = this.state;
+    const { deck } = this.state;
     const { filtered, filteredDeck } = this.state;
-    if (filtered) deck = filteredDeck;
-    const currKey = Math.random() * 2;
-    const cardEls = deck.map((card, index) => (
-      <div key={ index } className="card-box">
-        <Card key={ currKey } { ...card } />
-        <button
-          name={ card.cardDescription }
-          type="button"
-          onClick={ this.removeFromDeck }
-          data-testid="delete-button"
-        >
-          Excluir
-        </button>
-      </div>));
-
-    const deckList = (
-      <div className="deck-container">
-        <div className="filter">
-          <p> Filtro de Busca </p>
-          <input
-            onChange={ this.filterByName }
-            placeholder="Nome da carta"
-            data-testid="name-filter"
-            name="filter"
-            type="text"
-          />
-        </div>
-        <div className="deck">{ cardEls }</div>
-      </div>);
-
     return (
       <div>
         <div className="container">
@@ -235,7 +205,13 @@ class App extends React.Component {
             <Card { ...this.state } />
           </div>
         </div>
-        { deckList }
+        <DeckList
+          deck={ deck }
+          filtered={ filtered }
+          filteredDeck={ filteredDeck }
+          onFilter={ this.filterByName }
+          removeFromDeck={ this.removeFromDeck }
+        />
       </div>
     );
   }
